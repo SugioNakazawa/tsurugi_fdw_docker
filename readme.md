@@ -15,8 +15,8 @@
 ## Getting start & prepare FDW
 FDWのセットアップはコンテナ起動後に手動にて行います。
 ```
-tsurugi4$ docker compose up -d
-tsurugi4$ docker exec -it tsurugi_fdw /bin/bash
+tsurugi_fdw_docker$ docker compose up -d
+tsurugi_fdw_docker$ docker exec -it tsurugi_fdw /bin/bash
 
 $ psql postgres < /docker-entrypoint-initdb.d/01_ddl.sql
 $ psql postgres < /docker-entrypoint-initdb.d/02_setup.sql
@@ -25,6 +25,7 @@ $ psql postgres < /docker-entrypoint-initdb.d/02_setup.sql
 ## Sample
 ### Create sample external table
 ```SQL
+$ psql postgres
 # CREATE TABLE tsurugi_customer( c_id INTEGER PRIMARY KEY, c_name VARCHAR(30) NOT NULL, c_age INTEGER) TABLESPACE tsurugi;
 # CREATE FOREIGN TABLE tsurugi_customer( c_id INTEGER,c_name VARCHAR(30) NOT NULL,c_age INTEGER) SERVER tsurugi;
 ```
