@@ -1,5 +1,6 @@
 # Tsurugi DB & PostgreSQL & FDW
 ## Resources
+```
 ├── docker-compose.yml
 ├── entrypoint
 │   └── docker-entrypoint.sh    # Launch Tsurugi, PostgreSQL
@@ -9,6 +10,7 @@
 ├── readme.md                   # This document
 └── tsurugi_fdw
     └── Dockerfile
+```
 
 ## Getting start & prepare FDW
 FDWのセットアップはコンテナ起動後に手動にて行います。
@@ -27,6 +29,6 @@ $ psql postgres < /docker-entrypoint-initdb.d/02_setup.sql
 # CREATE FOREIGN TABLE tsurugi_customer( c_id INTEGER,c_name VARCHAR(30) NOT NULL,c_age INTEGER) SERVER tsurugi;
 ```
 ### Connect from client
-```
+```shell
 $ psql postgres -h localhost -U tsurugi
 ```
