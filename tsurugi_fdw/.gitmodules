@@ -1,0 +1,12 @@
+[submodule "third_party/ogawayama"]
+        path = third_party/ogawayama
+        url = https://github.com/project-tsurugi/ogawayama.git
+[submodule "third_party/metadata-manager"]
+        path = third_party/metadata-manager
+        url = https://github.com/project-tsurugi/metadata-manager.git
+[submodule "third_party/message-manager"]
+        path = third_party/message-manager
+        url = https://github.com/project-tsurugi/message-manager.git
+[submodule "third_party/takatori"]
+        path = third_party/takatori
+        url = https://github.com/project-tsurugi/takatori.git

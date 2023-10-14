@@ -1,0 +1,23 @@
+version: "3"
+services:
+  tsurugi_fdw:
+    image: tsurugi_fdw:beta.1.0.0
+    build: ./tsurugi_fdw
+    container_name: tsurugi_fdw
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+      - LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:/usr/lib/tsurugi/lib
+      # - TSURUGI_CONNECTION_STRING='host=localhost dbname=tsurugi'
+      # - TSURUGI_HOME=/usr/lib/tsurugi
+    ports:
+      - "5432:5432"
+      - "12345:12345"
+    entrypoint: 'bash /usr/local/bin/docker-entrypoint.sh'
+    # command: '/home/tsurugi/pgsql/bin/pg_ctl -D /home/tsurugi/pgsql/data start'
+    # command: '/home/tsurugi/pgsql/bin/postgres -D /home/tsurugi/pgsql/data'
+    volumes:
+      - ./entrypoint:/usr/local/bin
+      # - ./data:/home/tsurugi/pgsql/data
+      - ./initdb:/docker-entrypoint-initdb.d
