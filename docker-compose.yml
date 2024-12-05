@@ -1,7 +1,6 @@
-version: "3"
 services:
   tsurugi_fdw:
-    image: tsurugi_fdw:beta.1.0.0
+    image: tsurugi_fdw:1.1.0
     build: ./tsurugi_fdw
     container_name: tsurugi_fdw
     environment:
