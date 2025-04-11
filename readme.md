@@ -1,4 +1,4 @@
-# Tsurugi DB & PostgreSQL & FDW
+# Tsurugi DB & PostgreSQL FDW
 ## Resources
 ```
 ├── docker-compose.yml
@@ -15,8 +15,8 @@
 ## Getting start & prepare FDW
 FDWのセットアップはコンテナ起動後に手動にて行います。
 ```
-tsurugi_fdw_docker$ docker compose up -d
-tsurugi_fdw_docker$ docker exec -it tsurugi_fdw /bin/bash
+docker compose up -d
+docker exec -it tsurugi_fdw bash
 
 # in container
 psql postgres < /docker-entrypoint-initdb.d/01_ddl.sql
@@ -24,13 +24,26 @@ psql postgres < /docker-entrypoint-initdb.d/02_setup.sql
 ```
 
 ## Sample
-### Create sample external table
+### Create sample table
+
+on Tsurugi
 ```SQL
-psql postgres
-CREATE TABLE tsurugi_customer( c_id INTEGER PRIMARY KEY, c_name VARCHAR(30) NOT NULL, c_age INTEGER) TABLESPACE tsurugi;
-CREATE FOREIGN TABLE tsurugi_customer( c_id INTEGER,c_name VARCHAR(30) NOT NULL,c_age INTEGER) SERVER tsurugi;
+tgsql -c tcp://localhost:12345
+CREATE TABLE tg_customer( c_id INTEGER PRIMARY KEY, c_name VARCHAR(30) NOT NULL, c_age INTEGER);
+INSERT INTO tg_customer values(1,'one', 1);
+INSERT INTO tg_customer values(2,'two', 2);
+INSERT INTO tg_customer values(3,'three', 3);
 ```
-### Connect from client
-```shell
-$ psql postgres -h localhost -U tsurugi
+
+on postgresql
+```SQL
+psql postgres -h localhost -U tsurugi
+CREATE FOREIGN TABLE tg_customer( c_id INTEGER,c_name VARCHAR(30) NOT NULL,c_age INTEGER) SERVER tsurugi;
+postgres=# select * from tg_customer;
+ c_id | c_name | c_age 
+------+--------+-------
+    1 | one    |     1
+    2 | two    |     2
+    3 | three  |     3
+(3 rows)
 ```
