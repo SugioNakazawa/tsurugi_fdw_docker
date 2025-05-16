@@ -1,6 +1,6 @@
 services:
   tsurugi_fdw:
-    image: tsurugi_fdw:1.3.0
+    image: tsurugi_fdw:1.4.0
     build: ./tsurugi_fdw
     container_name: tsurugi_fdw
     environment:
