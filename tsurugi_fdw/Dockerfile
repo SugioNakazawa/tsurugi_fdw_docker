@@ -1,4 +1,4 @@
-FROM ghcr.io/project-tsurugi/tsurugidb:1.4.0
+FROM ghcr.io/project-tsurugi/tsurugidb:1.5.0
 
 SHELL ["/usr/bin/bash", "-l", "-c"]
 
